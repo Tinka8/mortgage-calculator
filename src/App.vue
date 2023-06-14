@@ -13,15 +13,15 @@
                 </div>
                 <div>
                     <div>Repayment time: <span class="font-semibold text-xl">{{ numbers.repaymentTime }} years</span></div> 
-                    <input v-model="numbers.repaymentTime" type="range" min="0" max="50" />
+                    <input v-model="numbers.repaymentTime" placeholder="20" type="range" min="0" max="50" />
                 </div>
-                <div class="flex items-center">
-                    <div>Interest rate:</div> 
-                    <div class="font-semibold text-xl text-black">3%</div>
+                <div>
+                    <div>Interest rate: <span class="font-semibold text-xl text-black">{{ numbers.interestRate }} %</span></div> 
+                    <input v-model="numbers.interestRate" placeholder="10" type="range" min="0" max="20" />
                 </div>
                 <div>
                     <div>Loan amount</div>
-                    <div class="font-semibold text-xl text-black"> $315,000</div>
+                    <div class="font-semibold text-xl text-black">${{ loanAmount }}</div>
                 </div>
                 <div>
                     <div>Estimated pr. month:</div>
@@ -39,14 +39,27 @@ import { ref, computed } from 'vue';
 const numbers = ref({
     purchasePrice: "",
     downPayment: "",
-    repaymentTime: ref(20),
-    interestRate: ""
+    repaymentTime: "",
+    interestRate: "",
 });
 
 
-const estimatedPerMonth = computed(() => {
-    return numbers.value.purchasePrice / 12;
+const loanAmount = computed(() => {
+    return numbers.value.purchasePrice - numbers.value.downPayment;
 });
+
+const interestRateValue = computed(() => {
+    return numbers.value.interestRate / 100 / 12;
+});
+
+const repaymentTime = computed(() => {
+    vaule.repaymentTime * 12;
+});
+
+
+const estimatedPerMonth = ((interestRateValue * Math.pow(1 + interestRateValue, repaymentTime)) / (Math.pow(1 + interestRateValue, repaymentTime) - 1)) * numbers.purchasePrice;
+
+
 
 
 </script>
