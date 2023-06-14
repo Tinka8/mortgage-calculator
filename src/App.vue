@@ -4,21 +4,20 @@
             <h1 class="font-bold text-xl pb-10">Mortgage calculator</h1>
             <div class="grid grid-cols-3 gap-10 text-lg">
                 <div>
-                    <div>Purchase price: <span class="font-semibold text-xl">${{ purchasePrice }}</span></div>
-                    <input v-model="purchasePrice" placeholder="Purchase Price" />
+                    <div>Purchase price: <span class="font-semibold text-xl">${{ numbers.purchasePrice }}</span></div>
+                    <input v-model="numbers.purchasePrice" type="number" min="100" max="100000" placeholder="315,000" class="w-32 rounded px-2" />
                 </div>
                 <div>
-                    <div>Down payment: <span class="font-semibold text-xl">${{ downPayment }}</span></div> 
-                    <input v-model="downPayment" placeholder="Down Payment" />
+                    <div>Down payment: <span class="font-semibold text-xl">${{ numbers.downPayment }}</span></div> 
+                    <input v-model="numbers.downPayment" type="number" min="100" max="100000" placeholder="315,000" class="w-32 rounded px-2" />
                 </div>
                 <div>
-                    <div>Repayment time: <span class="font-semibold text-xl">{{ repaymentTime }} years</span></div> 
-                    <input v-model="repaymentTime" placeholder="Repayment Time" />
+                    <div>Repayment time: <span class="font-semibold text-xl">{{ numbers.repaymentTime }} years</span></div> 
+                    <input v-model="numbers.repaymentTime" type="range" min="0" max="50" />
                 </div>
                 <div class="flex items-center">
                     <div>Interest rate:</div> 
                     <div class="font-semibold text-xl">3%</div>
-                    <div></div>
                 </div>
                 <div>
                     <div>Loan amount</div>
@@ -37,13 +36,14 @@
 <script setup> 
 import { ref } from 'vue';
 
-const numebrs = ref({
+const numbers = ref({
     purchasePrice: "",
     downPayment: "",
-    repaymentTime: "",
+    repaymentTime: ref(20),
     interestRate: ""
 });
 
+// purchase price a down payment
 
 
 </script>
